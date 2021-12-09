@@ -3,24 +3,33 @@ from tensorflow.keras.models import load_model
 import numpy as np
 import os
 import cv2
+from io import BytesIO
+from PIL import Image
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = './static/uploads/'
-model = load_model('models.h5')
+model = load_model('models.h5',compile=False)
 
-class_dict = {0: 'Daisy', 1: 'Dandelion', 2: 'Rose', 3: 'Sun Flower', 4: 'Tulip'}
+def preprocess(img,input_size):
+    nimg = cv2.resize(img, (250, 250))
+    img_arr = (np.array(nimg))/255
+    return img_arr
+
+def reshape(imgs_arr):
+    return np.stack(imgs_arr, axis=0)
 
 def predict_label(img_path):
-    query = cv2.imread(img_path)
-    output = query.copy()
-    query = cv2.resize(query, (32, 32))
-    q = []
-    q.append(query)
-    q = np.array(q, dtype='float') / 255.0
-    q_pred = model.predict(q)
-    predicted_bit = int(q_pred)
-    return class_dict[predicted_bit]
+    input_size = (250,250)
+    channel = (5,)
+    input_shape = input_size + channel
+    labels = ['Daisy','Dandelion','Rose','Sunflower','Tulip']
+    im = cv2.imread(img_path)
+    x = preprocess(im,input_size)
+    x = reshape([x])
+    y = model.predict(x)
+    return labels[np.argmax(y)], np.max(y)
 
+ 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
