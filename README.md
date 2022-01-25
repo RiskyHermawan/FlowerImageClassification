@@ -2,13 +2,13 @@
 
 ## Deskripsi singkat
 
-Repository ini berisi semua file yang dibutuhkan untuk melakukan deployment model Machine Learning Image Classification menggunakan CNN (Convolutional Neural Network). Adapun model yang digunakan merupakan model untuk memprediksi gambar gajah atau singa (Elephant vs Lion).
+Repository ini berisi semua file yang dibutuhkan untuk melakukan deployment model Machine Learning Image Classification menggunakan CNN (Convolutional Neural Network). Adapun model yang digunakan merupakan model untuk memprediksi jenis citra 5 jenis bunga.
 
 #
 
 ## Sekilas mengenai input model
 
-Agar dapat memprediksi kucing atau anjing, data input model harus mengikuti format sebagai berikut:
+Agar dapat memprediksi 5 citra bunga, data input model harus mengikuti format sebagai berikut:
 
 -   Gambar dengan format umum seperti .jpeg, .png, .webp, dsb.
 -   Gambar dikonversi ke dalam bentuk array/tensor
@@ -44,5 +44,11 @@ Agar dapat memprediksi kucing atau anjing, data input model harus mengikuti form
 ## Akses melalui Website
 
 1. Anda akan diberikan URL untuk membuka website berupa `localhost:5000/` atau `127.0.0.1:5000/`.
-1. Buka URL dengan browser, coba masukkan gambar gajah atau singa yang ingin di prediksi.
-1. Anda akan diberikan prediksi bahwa pada gambar tersebut adalah gajah atau singa pada halaman website.
+1. Buka URL dengan browser, coba masukkan salah satu dari citra 5 jenis bunga yang ingin di prediksi.
+1. Anda akan diberikan prediksi bahwa pada citra 5 jenis bunga pada halaman website.
+
+
+## Link Heroku
+
+code ini sudah di deploy juga ke heroku untuk linknya bisa diakses dibawah ini.
+https://flowerimageclassification.herokuapp.com/
